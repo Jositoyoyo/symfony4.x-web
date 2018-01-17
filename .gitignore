@@ -1,0 +1,22 @@
+/vendor/
+/nbproject/
+/config/routes/
+/config/packages/
+/config/bundles.php
+/config/routes.yaml
+.env
+.env.dist
+
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+.web-server-pid
+###< symfony/web-server-bundle ###
+/bin/
+/symfony.lock
+/translations/

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Mis notes-pro{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+    {%block nav %}
+       {% include 'nav.html.twig' %}
+    {% endblock %}
+ 
+        {% block body %}{% endblock %}
+ 
+    {% block javascripts %}
+        <script src="{{ asset('build/js/jquery-3.2.1.slim.min.js') }}"></script>
+        <script src="{{ asset('build/js/popper.min.js') }}"></script>
+        <script src="{{ asset('build/js/bootstrap.min.js') }}"></script>       
+    {% endblock %}
+</body>
+</html>
