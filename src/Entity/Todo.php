@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Task
+ * Todo
  *
- * @ORM\Table(name="task", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_task_user_idx", columns={"user"}), @ORM\Index(name="fk_task_folder1_idx", columns={"folder"})})
+ * @ORM\Table(name="todo", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_task_user_idx", columns={"user"}), @ORM\Index(name="fk_task_folder1_idx", columns={"folder"})})
  * @ORM\Entity
  */
-class Task
+class Todo
 {
     /**
      * @var integer
@@ -52,9 +52,9 @@ class Task
     /**
      * @var string
      *
-     * @ORM\Column(name="task", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="todo", type="text", length=65535, nullable=true)
      */
-    private $task;
+    private $todo;
 
     /**
      * @var string
@@ -173,17 +173,17 @@ class Task
     /**
      * @return string
      */
-    public function getTask()
+    public function getTodo()
     {
         return $this->task;
     }
 
     /**
-     * @param string $task
+     * @param string $todo
      */
-    public function setTask($task)
+    public function setTodo($todo)
     {
-        $this->task = $task;
+        $this->todo = $todo;
     }
 
     /**
