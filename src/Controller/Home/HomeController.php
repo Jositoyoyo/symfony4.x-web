@@ -7,25 +7,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Nota;
+use App\Entity\Note;
 use App\Entity\Todo;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
+
     /**
-     * @Route("/", methods="GET", name="index")
-     */
-    public function index() void {
-        $this->home();
-    }
-    /**
-     * @Route("/home", methods="GET", name="home_index")
+     * @Route("/", methods="GET", name="home-index")
      */
     public function home() {
-        
-       $doctrine = $this->getDoctrine();
-       
-       $todo = $doctrine->getRepository(Note::class)
+
+        $doctrine = $this->getDoctrine();
+
+        $notes = $doctrine->getRepository(Note::class)
                 ->createQueryBuilder('p')
                 ->where('p.trash > :trash')
                 ->setParameter('trash', false)
@@ -33,13 +27,11 @@ class HomeController extends Controller
                 ->setMaxResults(100)
                 ->getQuery()
                 ->execute();
-       
-       return $this->render('base.html.twig', array(
-           'todo' => $todo)
-       ));
-        
-    }
 
-    
+        return $this->render('home/index.html.twig', array(
+        'title' => 'Home',
+        'notes' => $notes
+                ));
+    }
 
 }

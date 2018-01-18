@@ -69,7 +69,17 @@ class Note
      * @ORM\Column(name="trash", type="boolean", nullable=true)
      */
     private $trash;
-
+    
+    /**
+     * @var \Folder
+     *
+     * @ORM\OneToOne(targetEntity="Folder")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="folder", referencedColumnName="id")
+     * })
+     */
+    private $folder;
+    
     /**
      * @var \User
      *

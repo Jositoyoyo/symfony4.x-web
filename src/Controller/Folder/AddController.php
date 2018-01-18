@@ -14,7 +14,7 @@ class AddController extends Controller
     /**
      * @Route("/folder/add", methods="POST")
      */
-    public function add(Request $request)
+    public function addFolder(Request $request)
     {
         $carpeta = new Carpeta();
         $carpeta->setNombre($request->request->get('nombre'));

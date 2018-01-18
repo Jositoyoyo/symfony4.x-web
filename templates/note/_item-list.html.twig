@@ -1,0 +1,7 @@
+{% if notes %}
+    {% for note in notes %}
+        {{ include('note/_item.html.twig', { 'note': note }) }}
+    {% endfor %} 
+{% else %}
+    {{ include('components/alert/_alert-warning.html.twig', { 'msg': 'No se han encontrado notas' }) }}
+{% endif %}    

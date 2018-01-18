@@ -1,16 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="container">
-        {% include 'folder/form.html.twig' %}
-        <div class="row">
-            {% for folder in folders %}
-                <ul>
-                    <li>
-                        {{ folder.name }} <a href="{{ path('folder-edit', {'slug': folder.slug}) }}">Editar</a> 
-                    </li>
-                </ul>
-            {% endfor %}
-        </div>
-        <hr>
+        {{ include('folder/_item-list.html.twig', { 'folders': folders }) }}
     </div> 
 {% endblock %}

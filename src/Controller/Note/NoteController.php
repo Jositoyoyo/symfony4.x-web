@@ -15,7 +15,7 @@ use App\Service\CarpetaNotasService;
 class NoteController extends Controller
 {
     /**
-     * @Route("/notes", methods="GET")
+     * @Route("/notes", methods="GET", name="note-index")
      */
     public function index()
     {
@@ -43,7 +43,7 @@ class NoteController extends Controller
     }
 
     /**
-     * @Route("/nota/add", methods="POST")
+     * @Route("/nota/add/note", methods="POST")
      */
     public function add(Request $request){
 
