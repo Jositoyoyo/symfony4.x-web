@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Folder;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +21,7 @@ class FolderController extends Controller {
                 ->setMaxResults(100)
                 ->getQuery()
                 ->execute();
-
+        
         return $this->render('folder/index.html.twig', array(
                     'title' => 'Folders',
                     'folders' => $folders

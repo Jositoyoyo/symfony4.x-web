@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Todo
  *
- * @ORM\Table(name="todo", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_task_user_idx", columns={"user"}), @ORM\Index(name="fk_task_folder1_idx", columns={"folder"})})
+ * @ORM\Table(name="todo", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="slug_UNIQUE", columns={"slug"})}, indexes={@ORM\Index(name="fk_todo_user_idx", columns={"user"}), @ORM\Index(name="fk_todo_folder1_idx", columns={"folder"})})
  * @ORM\Entity
  */
-class Todo
-{
+class Todo {
+
     /**
      * @var integer
      *
@@ -45,16 +45,23 @@ class Todo
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="todo", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="slug", type="string", length=45, nullable=false)
      */
-    private $todo;
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="task", type="text", length=65535, nullable=true)
+     */
+    private $task;
 
     /**
      * @var string
@@ -66,19 +73,9 @@ class Todo
     /**
      * @var boolean
      *
-     * @ORM\Column(name="trash", type="boolean", nullable=true)
+     * @ORM\Column(name="trash", type="boolean", nullable=false)
      */
     private $trash;
-
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
-     * })
-     */
-    private $user;
 
     /**
      * @var \Folder
@@ -91,166 +88,157 @@ class Todo
     private $folder;
 
     /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+    public function __construct() {
+        $this->slug = md5(uniqid($this->name, true));
+    }
+
+    /**
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
      * @param int $id
      */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
     }
 
     /**
      * @return \DateTime
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
     /**
      * @param \DateTime $created
      */
-    public function setCreated($created)
-    {
+    public function setCreated($created) {
         $this->created = $created;
     }
 
     /**
      * @return \DateTime
      */
-    public function getModify()
-    {
+    public function getModify() {
         return $this->modify;
     }
 
     /**
      * @param \DateTime $modify
      */
-    public function setModify($modify)
-    {
+    public function setModify($modify) {
         $this->modify = $modify;
     }
 
     /**
      * @return int
      */
-    public function getPriority()
-    {
+    public function getPriority() {
         return $this->priority;
     }
 
     /**
      * @param int $priority
      */
-    public function setPriority($priority)
-    {
+    public function setPriority($priority) {
         $this->priority = $priority;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
     /**
      * @param string $title
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
     }
 
     /**
      * @return string
      */
-    public function getTodo()
-    {
+    public function getTask() {
         return $this->task;
     }
 
     /**
-     * @param string $todo
+     * @param string $task
      */
-    public function setTodo($todo)
-    {
-        $this->todo = $todo;
+    public function setTask($task) {
+        $this->task = $task;
     }
 
     /**
      * @return string
      */
-    public function getComment()
-    {
+    public function getComment() {
         return $this->comment;
     }
 
     /**
      * @param string $comment
      */
-    public function setComment($comment)
-    {
+    public function setComment($comment) {
         $this->comment = $comment;
     }
 
     /**
      * @return bool
      */
-    public function isTrash()
-    {
+    public function isTrash() {
         return $this->trash;
     }
 
     /**
      * @param bool $trash
      */
-    public function setTrash($trash)
-    {
+    public function setTrash($trash) {
         $this->trash = $trash;
-    }
-
-    /**
-     * @return \User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param \User $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
     }
 
     /**
      * @return \Folder
      */
-    public function getFolder()
-    {
+    public function getFolder() : Folder {
         return $this->folder;
     }
 
     /**
      * @param \Folder $folder
      */
-    public function setFolder($folder)
-    {
+    public function setFolder(Folder $Folder) {
         $this->folder = $folder;
     }
 
+    /**
+     * @return \User
+     */
+    public function getUser(): User {
+        return $this->user;
+    }
 
+    /**
+     * @param \User $user
+     */
+    public function setUser(User $user) {
+        $this->user = $user;
+    }
 
 }
-

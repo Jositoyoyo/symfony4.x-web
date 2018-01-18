@@ -7,11 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Folder
  *
- * @ORM\Table(name="folder", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="nombre_UNIQUE", columns={"name"})})
+ * @ORM\Table(name="folder", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="nombre_UNIQUE", columns={"name"}), @ORM\UniqueConstraint(name="slug_UNIQUE", columns={"slug"})})
  * @ORM\Entity
  */
-class Folder
-{
+class Folder {
+
     /**
      * @var integer
      *
@@ -31,55 +31,61 @@ class Folder
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->slug = md5(uniqid($this->name, true));
     }
 
     /**
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-
 
     /**
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getSlug()
-    {
-        return $this->slug;
+    public function getDescription() {
+        return $this->description;
     }
 
     /**
-     * @param string $slug
+     * @param string $description
      */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
+    public function setDescription($description) {
+        $this->description = $description;
     }
 
+    /**
+     * @return string
+     */
+    public function getSlug() {
+        return $this->slug;
+    }
 
 }

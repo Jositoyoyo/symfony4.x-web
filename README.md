@@ -36,3 +36,12 @@ Editores recomendados :
 	PhpStrorm (de Pago)
 	Netbeans (gratis)
 Lo demas es cosa tuya ;)
+
+
+
+
+
+
+
+------------------------------------------
+ php bin/console doctrine:mapping:convert annotation --from-database App/Entity
