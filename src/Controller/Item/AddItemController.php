@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Note;
+namespace App\Controller\Item;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +12,7 @@ use App\Entity\Carpeta;
 use App\Service\SlugGenerator;
 use App\Form\NoteType;
 
-class NoteAddController extends Controller {
+class AddItemController extends Controller {
 
     /**
      * @Route("/note/add", methods={"GET", "POST"}, name="note-add")
@@ -32,7 +32,7 @@ class NoteAddController extends Controller {
 
             return $this->redirectToRoute('note-index');
         }
-        return $this->render('note/form.html.twig', [
+        return $this->render('folder/folder-items.html.twig', [
                     'title' => 'Nueva nota',
                     'form' => $form->createView(),
         ]);

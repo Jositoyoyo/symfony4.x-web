@@ -40,13 +40,13 @@ class Folder {
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
-
-    private $notesCount;
-
-    public function __construct() {
-        $this->slug = md5(uniqid($this->name, true));
-    }
-
+    
+    /**
+     * @var int
+     */
+    private $itemsCount;
+    
+  
     /**
      * @return int
      */
@@ -81,6 +81,13 @@ class Folder {
     public function setDescription($description) {
         $this->description = $description;
     }
+    
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug) {
+        $this->slug = $slug;
+    }
 
     /**
      * @return string
@@ -89,11 +96,11 @@ class Folder {
         return $this->slug;
     }
 
-    public function setNotesCount($count) {
+    public function setItemsCount($count) {
       $this->notesCount = $count;
     }
     
-    public function getNotesCount(){
+    public function getItemsCount(){
       return $this->notesCount;
     }
 

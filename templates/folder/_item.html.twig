@@ -1,8 +1,12 @@
-<div class="card col-md-4">
-  <div class="card-body">
-    <h5 class="card-title">{{ folder.name }}</h5>
-    <p class="card-text">{{ folder.description }}</p>
-    <a href="#" class="btn btn-primary">Ver</a>
-    <a href="#" class="btn btn-danger">Borrar</a>
-  </div>
+<div class="col-md-3">
+    <a href="{{ path('folder-items', {'slug': folder.slug}) }}" class="btn btn-primary">
+        {{ folder.name }} <span class="badge badge-light">
+            {% if folder.itemsCount > 0 %}    
+                {{ folder.itemsCount }}
+            {% else %}
+                Vacia
+            {% endif %}    
+        </span>
+    </a>
+    <a href="{{ path('folder-edit', {'slug': folder.slug}) }}" class="btn btn-warning">Editar</a>
 </div>   

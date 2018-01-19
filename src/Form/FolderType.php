@@ -12,7 +12,8 @@ class FolderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('field_name')
+            ->add('name')
+            ->add('description')
         ;
     }
 
@@ -20,7 +21,7 @@ class FolderType extends AbstractType
     {
         $resolver->setDefaults([
             // uncomment if you want to bind to a class
-            //'data_class' => Folder::class,
+            'data_class' => Folder::class,
         ]);
     }
 }

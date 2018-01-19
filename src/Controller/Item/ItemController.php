@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Note;
+namespace App\Controller\Item;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +12,7 @@ use App\Entity\Carpeta;
 use App\Service\SlugGenerator;
 use App\Service\CarpetaNotasService;
 
-class NoteController extends Controller
+class ItemController extends Controller
 {
     /**
      * @Route("/notes", methods="GET", name="note-index")

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Folder;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +26,23 @@ class FolderController extends Controller {
     public function index() {
 
         $folders = $this->folderRepository->findFolderAndCountItems();
-        var_dump($folders);
         return $this->render('folder/index.html.twig', array(
-                    'title' => 'Folders',
-                    'folders' => null
+                    'title' => 'Mostrar carpetas',
+                    'folders' => $folders
+        ));
+    }
+
+    /**
+     * @Route("/folder/{slug}/items", methods="GET", name="folder-items")
+     */
+    public function showFolderItems($slug) {
+
+        $result = $this->folderRepository->findfolderAndItems($slug);
+        return $this->render('folder/folder-items.html.twig', array(
+                    'title' => $result->folder->getName(),
+                    'folder' => $result->folder,
+                    'items' => $result->items,
+                    'itemsCount' => $result->countItems
         ));
     }
 

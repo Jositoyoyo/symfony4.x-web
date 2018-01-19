@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Todo
+ * Note
  *
- * @ORM\Table(name="todo", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="slug_UNIQUE", columns={"slug"})}, indexes={@ORM\Index(name="fk_todo_user_idx", columns={"user"}), @ORM\Index(name="fk_todo_folder1_idx", columns={"folder"})})
+ * @ORM\Table(name="item", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_note_user1_idx", columns={"user"}), @ORM\Index(name="fk_note_folder1_idx", columns={"folder"})})
  * @ORM\Entity
  */
-class Todo {
+class Item {
 
     /**
      * @var integer
@@ -38,6 +37,13 @@ class Todo {
     /**
      * @var integer
      *
+     * @ORM\Column(name="type", type="integer", nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="priority", type="integer", nullable=true)
      */
     private $priority;
@@ -45,30 +51,23 @@ class Todo {
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=45, nullable=false)
+     * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="task", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="body", type="text", length=65535, nullable=false)
      */
-    private $task;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="comment", type="text", length=65535, nullable=true)
-     */
-    private $comment;
+    private $body;
 
     /**
      * @var boolean
@@ -97,22 +96,18 @@ class Todo {
      */
     private $user;
 
-    public function __construct() {
-        $this->slug = md5(uniqid($this->name, true));
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     */
+    private $comment;
 
     /**
      * @return int
      */
     public function getId() {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id) {
-        $this->id = $id;
     }
 
     /**
@@ -146,6 +141,20 @@ class Todo {
     /**
      * @return int
      */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    /**
+     * @return int
+     */
     public function getPriority() {
         return $this->priority;
     }
@@ -174,29 +183,29 @@ class Todo {
     /**
      * @return string
      */
-    public function getTask() {
-        return $this->task;
+    public function getSlug() {
+        return $this->slug;
     }
 
     /**
-     * @param string $task
+     * @param string $slug
      */
-    public function setTask($task) {
-        $this->task = $task;
+    public function setSlug($slug) {
+        $this->slug = $slug;
     }
 
     /**
      * @return string
      */
-    public function getComment() {
-        return $this->comment;
+    public function getBody() {
+        return $this->body;
     }
 
     /**
-     * @param string $comment
+     * @param string $body
      */
-    public function setComment($comment) {
-        $this->comment = $comment;
+    public function setBody($body) {
+        $this->body = $body;
     }
 
     /**
@@ -216,7 +225,7 @@ class Todo {
     /**
      * @return \Folder
      */
-    public function getFolder() : Folder {
+    public function getFolder(): Folder {
         return $this->folder;
     }
 
@@ -239,6 +248,20 @@ class Todo {
      */
     public function setUser(User $user) {
         $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment() {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setContent($comment) {
+        $this->comment = $comment;
     }
 
 }
