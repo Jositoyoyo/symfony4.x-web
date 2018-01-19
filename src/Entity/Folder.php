@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -41,6 +40,8 @@ class Folder {
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
      */
     private $slug;
+
+    private $notesCount;
 
     public function __construct() {
         $this->slug = md5(uniqid($this->name, true));
@@ -86,6 +87,14 @@ class Folder {
      */
     public function getSlug() {
         return $this->slug;
+    }
+
+    public function setNotesCount($count) {
+      $this->notesCount = $count;
+    }
+    
+    public function getNotesCount(){
+      return $this->notesCount;
     }
 
 }

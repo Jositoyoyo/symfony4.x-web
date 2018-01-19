@@ -1,33 +1,37 @@
 <?php
-
 namespace App\Repository;
 
-use App\Entity\Carpeta;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use App\Entity\Folder;
+use App\Entity\Note;
+use Doctrine\ORM\EntityManager;
 
-class CarpetaRepository extends ServiceEntityRepository
-{
-    public function __construct()
-    {
-        parent::__construct(RegistryInterface::class, Carpeta::class);
-    }
+class FolderRepository {
 
-    /**
-     * @param $price
-     * @return Product[]
-     */
-    public function findAllGreaterThanPrice($price)
-    {
-        $qb = $this->createQueryBuilder('p')
-            ->andWhere('p.price > :price')
-            ->setParameter('price', $price)
-            ->orderBy('p.price', 'ASC')
-            ->getQuery();
+  private $em;
+  public function __construct(EntityManager $em)
+  {
+      $this->em = $em;
+  }
+  public function findFolderAndCountItems()  {
 
-        return $qb->execute();
+     $folders = $this->em->getRepository(Folder::class)->findAll();
+     if($folders){
+     foreach ($folders as $folder) {
+       $folder->setNotesCount($this->countNotesByFolder($folder->getId()));
+     }
+   }
 
-        // to get just one result:
-        // $product = $query->setMaxResults(1)->getOneOrNullResult();
-    }
+     return $folders;
+
+  }
+  public function countNotesByFolder($id=null) : int {
+    $items = $this->em->getRepository(Note::class)->createQueryBuilder('p')
+          //  ->where('p.trash = :trash')
+            ->andWhere('p.folder = :folder')
+          //  ->setParameter('trash', 0)
+            ->setParameter('folder', $id)
+            ->getQuery()
+            ->execute();
+    return count($items);
+  }
 }
