@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <a href="{{ path('folder-index') }}">{{ item.folder.name }}</a>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{ item.title }}</h5>
+    <p class="card-text">{{ item.body }}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>   
+{% endblock %}    
