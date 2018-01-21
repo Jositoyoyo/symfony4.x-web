@@ -13,14 +13,14 @@ use App\Entity\Carpeta;
 class UserController extends Controller
 {
     /**
-     * @Route("/user", methods="GET")
+     * @Route("/users", methods="GET", name="user-index")
      */
-    public function index()
-    {
-        return $this->render('base.html.twig');
-
+    public function index() {
+      $users = $this->getDoctrine()->getRepository(User::class)
+          ->findAll();
+          this->render('user/user-index.html-twig', [ 'users' => $users ])
     }
 
-   
+
 
 }
