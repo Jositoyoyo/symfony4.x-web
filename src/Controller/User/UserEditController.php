@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Form\UserType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserEditController extends Controller {
 
@@ -22,11 +23,12 @@ class UserEditController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
 
-            $note = $form->getData();
+            $data = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            //$em->persist($user);
+            //$em->flush();
 
             return $this->redirectToRoute('user-index');
         }
@@ -34,7 +36,6 @@ class UserEditController extends Controller {
                     'title' => 'Nueva Usuario',
                     'form' => $form->createView(),
         ]);
-
     }
 
 }

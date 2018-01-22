@@ -8,7 +8,7 @@
         <div class="row">
 
 {% for user in users %}
-        {{ include('note/item-list.html.twig', { 'note': note }) }}
+        {{ include('user/_item-list.html.twig', { 'users': users }) }}
     {% endfor %}
         </div>
 

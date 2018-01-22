@@ -36,7 +36,7 @@ class ItemController extends Controller {
     }
 
     /**
-     * @Route("/item/{slug}", methods="GET", name="note-view")
+     * @Route("/item/view/{slug}", methods="GET", name="note-view")
      */
     public function itemView($slug) {
 

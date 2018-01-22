@@ -3,15 +3,23 @@
     <div class="container">
         {{ form_start(form) }}
         <div class="form-group">
+            {{ form_widget(form.type, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.type) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.folder, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.folder) }}
+        </div>
+        <div class="form-group">
             {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Titulo'} }) }}
             {{ form_errors(form.title) }}
         </div>
         <div class="form-group">
-            {{ form_widget(form.content, { 'attr': {'class': 'form-control', 'id': 'tinymce'} }) }}
-            {{ form_errors(form.content) }}
+            {{ form_widget(form.body, { 'attr': {'class': 'form-control', 'id': 'tinymce'} }) }}
+            {{ form_errors(form.body) }}
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
         {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Guardar</button>   
         {{ form(form) }}
 
         {{ form_end(form) }}
@@ -21,7 +29,7 @@
     <script src={{ asset('assets/tinymce/tinymce.min.js') }}></script>
     <script>
         tinymce.init({
-            selector: '#note_content',
+            selector: '#item_body',
             height: 350,
             menubar: false,
             plugins: [],

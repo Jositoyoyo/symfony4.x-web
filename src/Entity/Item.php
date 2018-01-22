@@ -225,14 +225,14 @@ class Item {
     /**
      * @return \Folder
      */
-    public function getFolder(): Folder {
+    public function getFolder() {
         return $this->folder;
     }
 
     /**
      * @param \Folder $folder
      */
-    public function setFolder(Folder $Folder) {
+    public function setFolder(Folder $folder) {
         $this->folder = $folder;
     }
 

@@ -1,0 +1,7 @@
+{% if users %}
+    {% for user in users %}
+        {{ include('user/_item.html.twig', { 'user': user }) }}
+    {% endfor %} 
+{% else %}
+    {{ include('components/alert/_alert-warning.html.twig', { 'msg': 'No se han encontrado notas' }) }}
+{% endif %}    
