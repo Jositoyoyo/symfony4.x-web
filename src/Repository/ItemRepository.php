@@ -14,7 +14,18 @@ class ItemRepository {
         $this->em = $em;
     }
 
-    public function ItemsByFolder($folder = null) {
+    public function findByLastModify() {
+        return $this->em->getRepository(Item::class)
+                        ->createQueryBuilder('p')
+                        ->andwhere('p.trash = :trash')
+                        ->orderBy('p.modify', 'DESC')
+                        ->setParameter('trash', 0)
+                        ->setMaxResults(30)
+                        ->getQuery()
+                        ->execute();
+    }
+
+    public function findByFolder($folder = null) {
         return $this->em->getRepository(Item::class)
                         ->createQueryBuilder('p')
                         ->andwhere('p.trash = :trash')

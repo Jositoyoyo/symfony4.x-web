@@ -7,31 +7,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Note;
-use App\Entity\Todo;
+use App\Entity\Item;
 
 class HomeController extends Controller {
 
     /**
      * @Route("/", methods="GET", name="home-index")
      */
-    public function home() {
+    public function index() {
 
-        $doctrine = $this->getDoctrine();
+        $items = $this->getDoctrine()->getRepository(Item::class)->findAll();
 
-        $notes = $doctrine->getRepository(Note::class)
-                ->createQueryBuilder('p')
-                ->where('p.trash > :trash')
-                ->setParameter('trash', false)
-                ->orderBy('p.id', 'DESC')
-                ->setMaxResults(100)
-                ->getQuery()
-                ->execute();
-
-        return $this->render('home/index.html.twig', array(
-        'title' => 'Home',
-        'notes' => $notes
-                ));
+        return $this->render('home/home-index.html.twig', array(
+                    'title' => 'Home',
+                    'items' => $items
+        ));
     }
 
 }

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Service\SlugGenerator;
 
 /**
  * Note
@@ -99,9 +101,14 @@ class Item {
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="comment", type="text", length=65535, nullable=true)
      */
     private $comment;
+    
+    public function __construct() {
+        $this->modify = new \DateTime();
+        
+    }
 
     /**
      * @return int

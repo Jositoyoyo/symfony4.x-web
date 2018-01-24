@@ -12,8 +12,8 @@ security:
 
     firewalls:
         app-main:
-            pattern: ^/app
-            security: true
+            pattern: ^/
+            security: false
             request_matcher:      ~
             access_denied_url:    /access-denied
             

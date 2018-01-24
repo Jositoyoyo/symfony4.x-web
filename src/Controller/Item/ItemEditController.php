@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Item;
 use App\Form\ItemType;
-use App\Service\SlugGenerator;
 
 class ItemEditController extends Controller {
 
@@ -25,14 +24,17 @@ class ItemEditController extends Controller {
         if ($form->isSubmitted() && $form->isValid()) {
 
             $item = $form->getData();
+            $item->setCreated(new \DateTime());
+            $item->setSlug(\App\Service\SlugGenerator::TokenizenSlug());
+            $item->setTrash(0);
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();
-
-            return $this->redirectToRoute('note-index');
+            //return $this->redirectToRoute('item-index');
         }
         return $this->render('item/item-edit.html.twig', [
-                    'title' => 'Nueva nota',
+                    'title' => 'Nuevo item',
                     'form' => $form->createView(),
         ]);
     }

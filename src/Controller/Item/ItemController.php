@@ -25,7 +25,8 @@ class ItemController extends Controller {
      * @Route("/items", methods="GET", name="note-index")
      */
     public function index() {
-        
+        $items = $this->itemRepository->findByLastModify();
+        return $this->render('item/Item-index.html.twig', ['title' => 'ultimos items', 'items' => $items]);
     }
 
     /**
