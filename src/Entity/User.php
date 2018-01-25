@@ -149,7 +149,7 @@ class User implements UserInterface, \Serializable {
     public function getPlainPassword() {
         return $this->plainPassword;
     }
-    
+
     /**
      * @param string $password
      */
@@ -158,7 +158,7 @@ class User implements UserInterface, \Serializable {
     }
 
     public function getRoles() {
-        
+                return array('ROLE_USER');
     }
 
     public function getSalt() {
@@ -167,6 +167,28 @@ class User implements UserInterface, \Serializable {
 
     public function eraseCredentials() {
         
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+                // see section on salt below
+                // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized) {
+        list (
+                $this->id,
+                $this->username,
+                $this->password,
+                // see section on salt below
+                // $this->salt
+                ) = unserialize($serialized);
     }
 
 }

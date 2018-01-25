@@ -5,8 +5,10 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Entity\Item;
 use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Doctrine\ORM\EntityRepository;
 
-class UserRepository {
+class UserRepository extends EntityRepository implements UserLoaderInterface {
 
     private $em;
 
@@ -32,6 +34,15 @@ class UserRepository {
             }
         }
         return count($items);
+    }
+
+    public function loadUserByUsername($username) {
+        return $this->createQueryBuilder('u')
+                        ->where('u.username = :username OR u.email = :email')
+                        ->setParameter('username', $username)
+                        ->setParameter('email', $username)
+                        ->getQuery()
+                        ->getOneOrNullResult();
     }
 
 }
