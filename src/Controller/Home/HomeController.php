@@ -12,7 +12,7 @@ use App\Entity\Item;
 class HomeController extends Controller {
 
     /**
-     * @Route("/", methods="GET", name="home-index")
+     * @Route("/home", methods="GET", name="home-index")
      */
     public function index() {
 

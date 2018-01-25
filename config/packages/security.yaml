@@ -1,30 +1,29 @@
 security:
-
+    
     encoders:
-        App\Entity\User:
-            algorithm: bcrypt
+        
+        App\Entity\User: bcrypt
 
     providers:
-        db_provider:
-            entity:
-                class: App\Entity\User
-                property: username
+        
+        database_users:
+            entity: { class: App\Entity\User, property: username }
 
     firewalls:
-        app-main:
-            pattern: ^/
+        
+        user_area:
+            pattern: ^/login
             security: false
-            request_matcher:      ~
-            access_denied_url:    /access-denied
+            
+        secured_area:
+            pattern: ^/
+            security: true
             
             form_login:
                 check_path: /login_check
                 login_path: /login
-   
-                
-            logout:
-                path:   /logout
-                target: /
-                invalidate_session: false
+                default_target_path: /home
 
-      
+            logout:
+                path: /logout
+                target: /login
