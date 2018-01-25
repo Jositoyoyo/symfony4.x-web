@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"}), @ORM\UniqueConstraint(name="email_UNIQUE", columns={"email"})})
  * @ORM\Entity
  */
-class User {
+class User implements UserInterface {
 
     /**
      * @var integer
@@ -55,6 +56,7 @@ class User {
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
+    private $plainPassword;
 
     /**
      * @return int
@@ -138,6 +140,32 @@ class User {
      */
     public function setPassword($password) {
         $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword() {
+        return $this->plainPassword;
+    }
+    
+    /**
+     * @param string $password
+     */
+    public function setPlainPassword($password) {
+        $this->plainPassword = $password;
+    }
+
+    public function getRoles() {
+        
+    }
+
+    public function getSalt() {
+        return null;
+    }
+
+    public function eraseCredentials() {
+        
     }
 
 }

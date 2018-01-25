@@ -2,7 +2,7 @@
 {% block body %}
     <div class="container">
         {% if app.request.attributes.get('_route') == 'user-edit'%}
-            <button type="submit" class="btn btn-primary">Borrar esta carpeta</button>
+            <a href="{{ path('user-delete', { 'username': user.username } ) }}" class="btn btn-danger">Borrar</a>
             <small>Se borraran tambien los items</small>
         {% endif %}    
         {{ form_start(form) }}
@@ -23,8 +23,12 @@
             {{ form_errors(form.email) }}
         </div>
         <div class="form-group">
-            {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
-            {{ form_errors(form.password) }}
+            {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.plainPassword.first) }}
+        </div>
+         <div class="form-group">
+            {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.plainPassword.second) }}
         </div>
         <button type="submit" class="btn btn-primary">Crear Carpeta</button>
         {{ form_widget(form) }}

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\Item;
 use Doctrine\ORM\EntityManager;
 
 class UserRepository {
@@ -13,15 +14,24 @@ class UserRepository {
         $this->em = $em;
     }
 
-    public function ItemsByFolder($folder = null) {
+    public function ItemsByUser(int $user) {
         return $this->em->getRepository(Item::class)
                         ->createQueryBuilder('p')
-                        ->andwhere('p.trash = :trash')
-                        ->andWhere('p.folder = :folder')
-                        ->setParameter('trash', 0)
-                        ->setParameter('folder', $folder)
+                        ->andWhere('p.user = :user')
+                        ->setParameter('user', $user)
                         ->getQuery()
                         ->execute();
+    }
+
+    public function removeItemsByUser(int $user) {
+        $items = $this->ItemsByUser($user);
+        if ($items) {
+            foreach ($items as $item) {
+                $this->em->remove($item);
+                $this->em->flush();
+            }
+        }
+        return count($items);
     }
 
 }
