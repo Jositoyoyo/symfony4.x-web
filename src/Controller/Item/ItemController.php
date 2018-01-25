@@ -22,7 +22,7 @@ class ItemController extends Controller {
     }
 
     /**
-     * @Route("/items", methods="GET", name="note-index")
+     * @Route("/items", methods="GET", name="item-index")
      */
     public function index() {
         $items = $this->itemRepository->findByLastModify();
@@ -30,14 +30,15 @@ class ItemController extends Controller {
     }
 
     /**
-     * @Route("/items/folder/{slug}", methods="GET", name="note-folder")
+     * @Route("/items/folder/{slug}", methods="GET", name="items-by-folder")
      */
-    public function itemsInFolder() {
-        $this->itemRepository->ItemsByFolder($slug);
+    public function itemsByFolder($slug) {
+        $items = $this->itemRepository->findByFolder($slug);
+        var_dump($items);
     }
 
     /**
-     * @Route("/item/view/{slug}", methods="GET", name="note-view")
+     * @Route("/item/view/{slug}", methods="GET", name="item-view")
      */
     public function itemView($slug) {
 

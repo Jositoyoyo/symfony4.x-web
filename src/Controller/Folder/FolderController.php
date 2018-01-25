@@ -26,23 +26,36 @@ class FolderController extends Controller {
     public function index() {
 
         $folders = $this->folderRepository->findFolderAndCountItems();
-        return $this->render('folder/index.html.twig', array(
+        return $this->render('folder/folder-index.html.twig', array(
                     'title' => 'Mostrar carpetas',
                     'folders' => $folders
         ));
     }
 
     /**
+     * @Route("/folder/{slug}", methods="GET", name="folder-show")
+     */
+    public function folderShow($slug) {
+
+        $folder = $this->getDoctrine()->getRepository(Folder::class)->findOneBySlug($slug);
+        return $this->render('folder/folder-show.html.twig', array(
+                    'title' => $folder->getName(),
+                    'folder' => $folder,
+                    'itemsCount' => count($folder)
+        ));
+    }
+
+    /**
      * @Route("/folder/{slug}/items", methods="GET", name="folder-items")
      */
-    public function showFolderItems($slug) {
+    public function showfindFolderAndItemsItems($slug) {
 
-        $result = $this->folderRepository->findfolderAndItems($slug);
-        return $this->render('folder/folder-items.html.twig', array(
-                    'title' => $result->folder->getName(),
-                    'folder' => $result->folder,
-                    'items' => $result->items,
-                    'itemsCount' => $result->countItems
+        $folder = $this->folderRepository->findFolderAndItems($slug);
+        return $this->render('folder/folder-show.html.twig', array(
+                    'title' => $folder->folder->getName(),
+                    'folder' => $folder->folder,
+                    'items' => $folder->items,
+                    'itemsCount' => $folder->countItems
         ));
     }
 

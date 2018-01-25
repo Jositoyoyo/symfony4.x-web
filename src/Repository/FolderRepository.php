@@ -42,27 +42,30 @@ class FolderRepository {
         return count($items);
     }
 
-    public function findfolderAndItems($slug) {
+    public function findFolderAndItems($slug) {
 
-        $result = new \stdClass();
-        $result->folder = $this->em->getRepository(Folder::class)
-                ->findOneBySlug($slug);
+        $folder = new \stdClass();
+        $folder->countItems = null;
+        $folder->items = null;
+        $folder->folder = $this->em->getRepository(Folder::class)->findOneBySlug($slug);
 
-        if ($result->folder) {
-            $result->items = $this->em->createQuery(
-                            'SELECT p
+        if ($folder->folder) {
+            $folder->items = $this->em->createQuery(
+                    'SELECT p
                      FROM App\Entity\Item p
                      WHERE p.folder = :folder
                      AND p.trash = :trash
                      ORDER BY p.modify DESC')
                     ->setParameters([
-                        'folder' => $result->folder->getId(),
+                        'folder' => $folder->folder->getId(),
                         'trash' => 0])
                     ->setMaxResults(100)
                     ->execute();
-            $result->countItems = count($result->items);
+            $folder->countItems = count($folder->items);
+            return $folder;
         }
-        return $result;
+
+        return $folder;
     }
 
 }

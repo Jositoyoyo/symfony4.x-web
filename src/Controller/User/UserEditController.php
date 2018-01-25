@@ -32,10 +32,18 @@ class UserEditController extends Controller {
 
             return $this->redirectToRoute('user-index');
         }
-        return $this->render('user/user-new.html.twig', [
+        return $this->render('user/user-edit.html.twig', [
                     'title' => 'Nueva Usuario',
                     'form' => $form->createView(),
         ]);
+    }
+    
+    /**
+     * @Route("/user/{username}/edit", methods={"GET", "POST"}, name="user-edit")
+     */
+    public function userEdit(Request $request, $username) {
+        $user  = $this->getDoctrine()->getRepository(User::class)->findOneByUsername($username);
+        return $this->render('', [$user])
     }
 
 }

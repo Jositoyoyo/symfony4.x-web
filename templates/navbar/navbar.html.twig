@@ -1,20 +1,23 @@
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 20px;">
-        <a class="navbar-brand" href="#">{{ path() }}</a>
-        <div>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 20px;">
+    <a class="navbar-brand" href="{{ path('home-index') }}">Todo</a>
+    <div>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="">Carpeta default</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('user-index') }}">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Carpetas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Nuevo item</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('folder-new') }}">Nueva carpeta</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

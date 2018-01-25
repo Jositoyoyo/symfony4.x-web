@@ -99,3 +99,10 @@ Lo demas es cosa tuya ;)
 
 ------------------------------------------
  php bin/console doctrine:mapping:convert annotation --from-database App/Entity
+
+
+
+Faltan :
+Translate all proyect
+Crear el FronEnd
+Crear Dockeck y Jenkins

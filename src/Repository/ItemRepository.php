@@ -25,15 +25,4 @@ class ItemRepository {
                         ->execute();
     }
 
-    public function findByFolder($folder = null) {
-        return $this->em->getRepository(Item::class)
-                        ->createQueryBuilder('p')
-                        ->andwhere('p.trash = :trash')
-                        ->andWhere('p.folder = :folder')
-                        ->setParameter('trash', 0)
-                        ->setParameter('folder', $folder)
-                        ->getQuery()
-                        ->execute();
-    }
-
 }
