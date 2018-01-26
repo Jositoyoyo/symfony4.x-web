@@ -9,20 +9,23 @@ security:
                 property: username 
 
     firewalls:      
-        user_area:
-            pattern: ^/login
-            security: false
+        #user_area:
+        #    pattern: ^/login
+        #    security: false
             
         secured_area:
             pattern: ^/
-            security: false
             provider: database
             
             form_login:
-                check_path: /login_check
+                check_path: login_check
                 login_path: /login
-                default_target_path: /home
+                default_target_path: /items
 
             logout:
-                path: /logout
-                target: /login
+                path: logout
+                target: login
+                
+                
+    access_control:
+    - { path: ^/, roles: ROLE_ADMIN }
