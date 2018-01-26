@@ -25,4 +25,17 @@ class ItemRepository {
                         ->execute();
     }
 
+    public function findLastByUser(string $username) {
+        return $this->em->getRepository(Item::class)
+                        ->createQueryBuilder('p')
+                        ->andwhere('p.trash = :trash')
+                        ->andWhere('p.user = :username')
+                        ->orderBy('p.modify', 'DESC')
+                        ->setParameter('trash', 0)
+                        ->setParameter('username', $username)
+                        ->setMaxResults(30)
+                        ->getQuery()
+                        ->execute();
+    }
+
 }

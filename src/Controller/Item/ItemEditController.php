@@ -21,14 +21,14 @@ class ItemEditController extends Controller {
         $item = new Item();
         $form = $this->createForm(ItemType::class, $item);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $item = $form->getData();
             $item->setCreated(new \DateTime());
             $item->setSlug(\App\Service\SlugGenerator::TokenizenSlug());
             $item->setTrash(0);
-
+            $item->setUser($this->getUser());
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();

@@ -2,13 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\User;
+use App\Entity\Folder;
 use App\Entity\Item;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Doctrine\ORM\EntityRepository;
 
-class UserRepository extends EntityRepository implements UserLoaderInterface {
+class UserRepository {
 
     private $em;
 
@@ -16,33 +14,15 @@ class UserRepository extends EntityRepository implements UserLoaderInterface {
         $this->em = $em;
     }
 
-    public function ItemsByUser(int $user) {
+    public function findByLastModify() {
         return $this->em->getRepository(Item::class)
                         ->createQueryBuilder('p')
-                        ->andWhere('p.user = :user')
-                        ->setParameter('user', $user)
+                        ->andwhere('p.trash = :trash')
+                        ->orderBy('p.modify', 'DESC')
+                        ->setParameter('trash', 0)
+                        ->setMaxResults(30)
                         ->getQuery()
                         ->execute();
-    }
-
-    public function removeItemsByUser(int $user) {
-        $items = $this->ItemsByUser($user);
-        if ($items) {
-            foreach ($items as $item) {
-                $this->em->remove($item);
-                $this->em->flush();
-            }
-        }
-        return count($items);
-    }
-
-    public function loadUserByUsername($username) {
-        return $this->createQueryBuilder('u')
-                        ->where('u.username = :username OR u.email = :email')
-                        ->setParameter('username', $username)
-                        ->setParameter('email', $username)
-                        ->getQuery()
-                        ->getOneOrNullResult();
     }
 
 }

@@ -24,7 +24,7 @@ class ItemController extends Controller {
     /**
      * @Route("/items", methods="GET", name="item-index")
      */
-    public function index() {
+    public function items() {
         $items = $this->itemRepository->findByLastModify();
         return $this->render('item/Item-index.html.twig', ['title' => 'ultimos items', 'items' => $items]);
     }
@@ -34,7 +34,17 @@ class ItemController extends Controller {
      */
     public function itemsByFolder($slug) {
         $items = $this->itemRepository->findByFolder($slug);
-        var_dump($items);
+    }
+
+    /**
+     * @Route("/items/user/{username}", methods="GET", name="items-by-user")
+     */
+    public function itemsByUser($username) {
+        $items = $this->itemRepository->findLastByUser($username);
+        return $this->render('item/Item-index.html.twig', [
+                    'title' => 'ultimos items de ' . $username,
+                    'items' => $items
+        ]);
     }
 
     /**

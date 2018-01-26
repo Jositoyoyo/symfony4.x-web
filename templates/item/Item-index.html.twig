@@ -8,7 +8,7 @@
             <div class="row">
                 {% if items %}
                     {% for item in items %}
-                        {{ include('item/_item.html.twig', { 'item': item }) }}
+                        {{ include('item/item.html.twig', { 'item': item }) }}
                     {% endfor %} 
                 {% else %}
                     {{ include('components/alert/_alert-warning.html.twig', { 'msg': 'No se han encontrado notas' }) }}
