@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        
+        {% if app.request.attributes.get('_route') == 'folder-edit'%}
+            <button type="submit" class="btn btn-primary">Borrar esta carpeta</button>
+            <small>Se borraran tambien los items</small>
+        {% endif %}    
+        
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_widget(form.name, { 'attr': {'class': 'form-control', 'placeholder': 'Nombre de la carpeta'} }) }}
+            {{ form_errors(form.name) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.description, { 'attr': {'class': 'form-control', 'placeholder' : 'Comentarios sobre este item'} }) }}
+            {{ form_errors(form.description) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Carpeta</button>
+        {{ form_widget(form) }}
+        {{ form(form) }}
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

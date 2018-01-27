@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <main role="main" class="content">
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                {% if items %}
+                    {% for item in items %}
+                        {{ include('item/item.html.twig', { 'item': item }) }}
+                    {% endfor %} 
+                {% else %}
+                    {{ include('components/alert/_alert-warning.html.twig', { 'msg': 'No se han encontrado notas' }) }}
+                {% endif %} 
+            </div>
+
+            <hr>
+
+        </div> 
+
+    </main>
+
+{% endblock %}

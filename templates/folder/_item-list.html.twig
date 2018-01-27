@@ -1,0 +1,7 @@
+{% if folders %}
+    {% for folder in folders %}
+        {{ include('folder/_item.html.twig', { 'folder': folder }) }}
+    {% endfor %} 
+{% else %}
+    {{ include('components/alert/_alert-warning.html.twig', { 'msg': 'No se han encontrado carpetas' }) }}
+{% endif %}    

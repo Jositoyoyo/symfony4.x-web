@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_widget(form.type, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.type) }}
+        </div>
+            <div class="form-group">
+                {{ form_widget(form.folder, { 'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(form.folder) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.title, { 'attr': {'class': 'form-control', 'placeholder': 'Titulo'} }) }}
+                {{ form_errors(form.title) }}
+            </div>
+            <div id="item-type-form" class="form-group">
+                <div class="note">
+                {{ form_widget(form.body, { 'attr': {'class': 'form-control', 'id': 'tinymce'} }) }}
+                {{ form_errors(form.body) }}
+                </div>
+            </div>
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Guardar</button>   
+            {{ form(form) }}
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+     <script src={{ asset('assets/tinymce/tinymce.min.js') }}></script>
+    <script>
+        tinymce.init({
+            selector: '#item_body',
+            height: 350,
+            menubar: false,
+            plugins: [],
+            toolbar: 'styleselect | bold italic | bullist numlist',
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css']
+        });
+      
+    </script>
+   
+{% endblock %} 

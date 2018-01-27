@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="btn btn-primary">
+            {{ folder.name }} <span class="badge badge-light">
+                {% if itemsCount > 0 %}    
+                    {{ itemsCount }}
+                {% else %}
+                    Vacia
+                {% endif %}    
+            </span>
+        </div>
+        <a href="#" class="btn btn-warning">Editar</a>
+        <a href="#" class="btn btn-danger">Borrar</a>
+        <a href="{{ path('folder-item-new', { 'slug' : folder.slug }) }}" class="btn btn-success">Nuevo Item</a>
+        {% if items %}
+            {% for item in items %}
+                {{ include('item/_item.html.twig', { 'item': item }) }}
+            {% endfor %}   
+        {% else %}
+            La carpeta esta vacia
+        {% endif %}    
+    </div> 
+{% endblock %}

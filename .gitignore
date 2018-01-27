@@ -1,7 +1,6 @@
 /vendor/
 /nbproject/
 /config/routes/
-/config/packages/
 /config/bundles.php
 /config/routes.yaml
 .env
@@ -19,4 +18,3 @@
 ###< symfony/web-server-bundle ###
 /bin/
 /symfony.lock
-/translations/

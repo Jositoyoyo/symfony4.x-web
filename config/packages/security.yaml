@@ -1,0 +1,34 @@
+security:  
+    encoders:        
+        App\Entity\User:
+            algorithm:   plaintext
+            ignore_case: false
+            
+    providers:
+        database:
+            entity:
+                class: App\Entity\User
+                property: username 
+                
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+                always_use_default_target_path: false
+                default_target_path:            item-index
+            logout:
+                path:   logout
+                target: login
+            
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/home, roles: ROLE_ADMIN }
+                   
+ 

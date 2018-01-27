@@ -1,0 +1,12 @@
+<div class="col-md-3">
+    <a href="{{ path('folder-items', {'slug': folder.slug}) }}" class="btn btn-primary">
+        {{ folder.name }} <span class="badge badge-light">
+            {% if folder.itemsCount > 0 %}    
+                {{ folder.itemsCount }}
+            {% else %}
+                Vacia
+            {% endif %}    
+        </span>
+    </a>
+    <a href="{{ path('folder-edit', {'slug': folder.slug}) }}" class="btn btn-warning">Editar</a>
+</div>   

@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container">
+        {{ include('folder/_item-list.html.twig', { 'folders': folders }) }}
+    </div> 
+{% endblock %}
