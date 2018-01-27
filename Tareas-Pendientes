@@ -9,6 +9,7 @@ Sessiones -  flash
 Objetos recintes
 Tokens en los formularios
 Security
+Añadir a commit el archivo routes.yml
 
 
 Js
@@ -17,4 +18,4 @@ Js
 
 
 __________________________________
-Cambiar los join id por slug en todas las entidades
+Cambiar los join que apuntan a id por slug en todas las entidades !!! ( rehacer la tabla )
